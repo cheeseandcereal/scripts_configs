@@ -1,0 +1,31 @@
+#!/sbin/openrc-run
+
+description="Handle wireguard connection"
+
+depend()
+{
+    need net
+}
+
+start()
+{
+    /usr/bin/wg-quick up tun
+    eend $?
+}
+
+stop()
+{
+    /usr/bin/wg-quick down tun
+    eend $?
+}
+
+status()
+{
+    RESPONSE=$(/usr/bin/wg)
+    if [ "$RESPONSE" == "" ]; then
+        ewarn "status: not running"
+    else
+        einfo "status: running"
+    fi
+    eend $?
+}
