@@ -1,0 +1,21 @@
+[alias]
+    ca = commit -asm
+    cm = commit -sm
+    cbr = checkout -b
+    br = branch
+    co = checkout
+    st = status
+    pl = pull
+    ps = push
+[core]
+    editor = /usr/bin/vim
+[user]
+    name = Adam Crowder
+    email = adam@adamcrowder.net
+    signingkey = CA63AD7FC16C6CC0
+[gpg]
+    program = gpg2
+[commit]
+    gpgsign = true
+[push]
+    default = simple
