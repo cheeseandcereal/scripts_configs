@@ -29,6 +29,7 @@ set -x PATH $PATH /home/adam/Documents/scripts .
 set -x EDITOR vim
 set -x VISUAL vim
 set -x BROWSER firefox
+set -x GOPATH /home/adam/go
 
 # Set up gpg-agent
 set -x SSH_AUTH_SOCK "/run/user/1000/gnupg/S.gpg-agent.ssh"
@@ -37,12 +38,24 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # Generic aliases
 abbr ll "ls -Al"
+abbr k "kubectl"
 abbr v "vim"
 abbr g "git"
 abbr p "sudo pacman"
+abbr dl \'aria2c --max-connection-per-server=8 --min-split-size=1M\'
 abbr copy \'perl -pe "chomp if eof" | xsel -ib\'
+abbr rcopy \'rsync -arh --progress\'
+abbr orand \abbr orand \'xdg-open (ls | shuf -n 1)\'
+abbr code \'code . && exit\'
 
-nvm use 10' > ~/.config/fish/config.fish
+# Kubectl aliases
+abbr k "kubectl"
+abbr gp \'kubectl get pod\'
+abbr gl \'kubectl logs\'
+abbr kp \'kubectl delete pod --grace-period=0\'
+abbr descp \'kubectl describe pod\'
+
+nvm use 12' > ~/.config/fish/config.fish
 
 
 # Done
