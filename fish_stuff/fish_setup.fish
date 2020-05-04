@@ -18,6 +18,23 @@ sed -i "s/\\\n//" ~/.config/fish/functions/_pure_prompt_new_line.fish
 sed -i 's/-e (/-e -n (/g' ~/.config/fish/functions/fish_prompt.fish
 sed -i 's/echo "/echo -n "/g' ~/.config/fish/functions/_pure_prompt_ending.fish
 
+echo 'function u --description \'Upload a file\'
+    if [ $argv[1] ]
+        # write to output to tmpfile because of progress bar
+        set -l tmpfile ( mktemp -t transferXXXXXX )
+        if [ $argv[2] -a $argv[2] = "text" ]
+            curl --progress-bar --upload-file "$argv[1]" -H \'Content-Type: text/plain; charset=UTF-8\' https://d.robit.pw/u/(basename $argv[1]) >> $tmpfile
+        else
+            curl --progress-bar --upload-file "$argv[1]" https://d.robit.pw/u/(basename $argv[1]) >> $tmpfile
+        end
+        cat $tmpfile | perl -pe "chomp if eof" | xsel -ib
+        cat $tmpfile
+        command rm -f $tmpfile
+    else
+        echo \'usage: transfer FILE_TO_TRANSFER\'
+    end
+end' > ~/.config/fish/functions/u.fish
+
 # Create a fish config file (backing up if one already exists)
 if test -f ~/.config/fish/config.fish
   mv ~/.config/fish/config.fish ~/.config/fish/config.fish.bak
