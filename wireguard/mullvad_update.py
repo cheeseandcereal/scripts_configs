@@ -14,10 +14,12 @@ def pretty_print_servers(servers):
         print(f"{i+1:02} - {s['hostname']} - {s['provider']} / {s['network_port_speed']} Gbps - Owned: {s['owned']} - IP: {s['ipv4_addr_in']}")
 
 
-def parse_sveltkit_data_json_arr(sveltkit_text):
+def parse_sveltkit_data_json(sveltkit_text):
     data_lines = sveltkit_text.splitlines()
     raw_json = json.loads(data_lines[-1])
-    data = raw_json['data'][1:]
+    for raw_data in raw_json['nodes']:
+        if isinstance(raw_data, dict) and len(raw_data['data']) > 100:
+            data = raw_data['data'][2:]
     data_ref = {}
     items = []
     info_id_list = []
@@ -46,7 +48,7 @@ def main(servers_json_path, city_code, conf_file):
     resp = requests.get(MULLVAD_SERVER_DATA)
     resp.raise_for_status()
     print('Parsing server data from mullvad')
-    servers = parse_sveltkit_data_json_arr(resp.text)
+    servers = parse_sveltkit_data_json(resp.text)
     # Save resulting parsed server json if necessary
     if servers_json_path:
         print(f'Saving parsed server data to {servers_json_path}')
