@@ -1,5 +1,4 @@
 #!/usr/bin/env fish
-# Modify the pure fish prompt to be all on a single line
-sed -i "s/\\\n//" ~/.config/fish/functions/_pure_prompt_new_line.fish
-sed -i 's/-e (/-e -n (/g' ~/.config/fish/functions/fish_prompt.fish
-sed -i 's/echo "/echo -n "/g' ~/.config/fish/functions/_pure_prompt_ending.fish
+# Modify the pure fish pure prompt to be on a single line and not have an extra space
+set -U pure_enable_single_line_prompt true
+sed -i "s/space ' '/space ''/" ~/.config/fish/functions/_pure_prompt.fish

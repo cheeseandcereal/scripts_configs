@@ -8,15 +8,14 @@ if ! test -d ~/.nvm
 end
 
 # Install fisher package manager
-curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 # Install nvm for fish
 set -U fish_user_paths
-fisher add brigand/fast-nvm-fish
+fisher install cheeseandcereal/fast-nvm-fish
 # Install the pure prompt and modify it to be a single line
-fisher add rafaelrinaldi/pure
-sed -i "s/\\\n//" ~/.config/fish/functions/_pure_prompt_new_line.fish
-sed -i 's/-e (/-e -n (/g' ~/.config/fish/functions/fish_prompt.fish
-sed -i 's/echo "/echo -n "/g' ~/.config/fish/functions/_pure_prompt_ending.fish
+fisher install pure-fish/pure
+set -U pure_enable_single_line_prompt true
+sed -i "s/space ' '/space ''/" ~/.config/fish/functions/_pure_prompt.fish
 
 echo 'function u --description \'Upload a file\'
     if [ $argv[1] ]
@@ -42,6 +41,7 @@ end
 
 echo '#!/usr/bin/env fish
 
+set -U pure_enable_single_line_prompt true
 set -x PATH $PATH /home/adam/Documents/scripts .
 set -x EDITOR vim
 set -x VISUAL vim
@@ -72,7 +72,7 @@ abbr gl \'kubectl logs\'
 abbr kp \'kubectl delete pod --grace-period=0\'
 abbr descp \'kubectl describe pod\'
 
-nvm use 12' > ~/.config/fish/config.fish
+nvm use 20' > ~/.config/fish/config.fish
 
 
 # Done
