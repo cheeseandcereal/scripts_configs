@@ -273,10 +273,6 @@
         "2": {
           "key": "TAB",
           "label": "TAB"
-        },
-        "4": {
-          "key": "#:toggleKbdProtocol()",
-          "label": "6/N-KRO"
         }
       }
     },
@@ -967,10 +963,6 @@
         "2": {
           "key": "\\",
           "label": "\\"
-        },
-        "4": {
-          "key": "#:toggleKbdProtocol()",
-          "label": "6/N-KRO"
         }
       }
     },
@@ -1264,6 +1256,10 @@
           "key": "UP",
           "label": "↑"
         },
+        "1": {
+          "key": "#:U\"Volume Up\" + CONS\"Volume Up\"",
+          "label": "VOL+"
+        },
         "2": {
           "key": "UP",
           "label": "↑"
@@ -1280,6 +1276,10 @@
         "0": {
           "key": "DOWN",
           "label": "↓"
+        },
+        "1": {
+          "key": "#:U\"Volume Down\" + CONS\"Volume Down\"",
+          "label": "VOL-"
         },
         "2": {
           "key": "DOWN",
