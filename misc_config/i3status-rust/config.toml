@@ -1,0 +1,109 @@
+[icons]
+icons = "awesome6"
+
+[[block]]
+block = "weather"
+format = " $icon $weather_verbose \uf2c8$temp \uf043$humidity \uf72e$wind.eng(w:0)mph"
+format_alt = " (24hr forecast) $icon_ffin $weather_verbose_ffin \uf2c8$temp_ffin ({$temp_fmin}-{$temp_fmax}) \uf043$humidity_ffin \uf72e$wind_ffin.eng(w:0)mph"
+[block.service]
+name = "openweathermap"
+api_key = "REDACTED"
+coordinates = ["REDACTED","REDACTED"]
+units = "imperial"
+forecast_hours = 24
+
+[[block]]
+block = "cpu"
+info_cpu = 20
+warning_cpu = 50
+critical_cpu = 90
+interval = 5
+format = " $icon $utilization.eng(w:2) $max_frequency.eng(w:4)"
+merge_with_next = true
+[[block.click]]
+button = "left"
+cmd = '''notify-send "🖥 CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)"'''
+
+[[block]]
+block = "temperature"
+interval = 5
+chip = "k10temp-pci-00c3"
+inputs = ["Tctl"]
+format = " $average.eng(w:2)"
+info = 55
+warning = 65
+
+[[block]]
+block = "memory"
+interval = 5
+format = " $icon $mem_used.eng(w:3,prefix:Gi,hide_unit:true)/$mem_total.eng(prefix:Gi,hide_unit:true)"
+[[block.click]]
+button = "left"
+cmd = '''notify-send "Memory hogs" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)"'''
+
+[[block]]
+block = "nvidia_gpu"
+interval = 3
+format = " $icon $utilization $clocks.eng(w:4,prefix:G) $memory.eng(w:3,prefix:Gi,hide_unit:true)/12Gi $temperature"
+
+[[block]]
+block = "disk_space"
+alert = 10.0
+warning = 25.0
+format = " $icon $used.eng(w:0,prefix:Gi)/$total.eng(w:3,prefix:Gi)"
+interval = 60
+
+[[block]]
+block = "net"
+device = "enp4s0f0"
+format = " $graph_down ^icon_net_down$speed_down.eng(w:3,prefix:K,unit:b) ^icon_net_up$speed_up.eng(w:3,prefix:K,unit:b) "
+format_alt = " $ip \uf796 $ipv6 \uf0ac"
+merge_with_next = true
+
+[[block]]
+block = "external_ip"
+use_ipv4 = true
+format = "$ip"
+[[block.click]]
+button = "left"
+update = true
+
+[[block]]
+block = "sound"
+show_volume_when_muted = true
+format = " $icon $volume $output_name "
+merge_with_next = true
+[block.mappings]
+"alsa_output.usb-Yoyodyne_Consulting_ODAC-revB-01.analog-stereo" = "\uf025"
+"alsa_output.pci-0000_0e_00.4.iec958-stereo" = "\uf026"
+"alsa_output.pci-0000_0c_00.1.hdmi-stereo" = "\uf390"
+[block.theme_overrides]
+warning_fg = { link = "critical_fg" }
+[[block.click]]
+button = "left"
+cmd = "/home/adam/documents/scripts/next_output"
+
+[[block]]
+block = "sound"
+device_kind = "source"
+show_volume_when_muted = true
+format = " $icon "
+[block.theme_overrides]
+warning_fg = { link = "critical_fg" }
+
+[[block]]
+block = "time"
+interval = 1
+format = " $icon $timestamp.datetime(f:'%Y %b %d (%a) %H:%M')"
+[[block.click]]
+button = "left"
+cmd = "/home/adam/documents/scripts/calendar month"
+[[block.click]]
+button = "right"
+cmd = "/home/adam/documents/scripts/calendar year"
+[[block.click]]
+button = "up"
+cmd = "/home/adam/documents/scripts/calendar up"
+[[block.click]]
+button = "down"
+cmd = "/home/adam/documents/scripts/calendar down"

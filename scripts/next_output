@@ -1,0 +1,7 @@
+#!/bin/sh
+CURRENT="$(pactl get-default-sink)"
+NEXT_OUTPUT="$(pactl list short sinks | grep -A 1 $CURRENT | grep -v $CURRENT | awk '{ print $1 }')"
+if [ "$NEXT_OUTPUT" = "" ]; then
+    NEXT_OUTPUT="$(pactl list short sinks | head -n 1 | awk '{ print $1 }')"
+fi
+pactl set-default-sink "$NEXT_OUTPUT"

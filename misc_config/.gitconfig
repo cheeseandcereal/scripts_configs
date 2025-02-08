@@ -9,13 +9,16 @@
     ps = push
 [core]
     editor = /usr/bin/vim
+    sshCommand = ssh -o PubkeyAcceptedKeyTypes=+ssh-rsa
 [user]
     name = Adam Crowder
     email = adam@adamcrowder.net
     signingkey = CA63AD7FC16C6CC0
 [gpg]
-    program = gpg2
+    program = gpg
 [commit]
     gpgsign = true
 [push]
     default = simple
+[pull]
+    rebase = false

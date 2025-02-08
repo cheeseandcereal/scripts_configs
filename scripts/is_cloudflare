@@ -1,0 +1,14 @@
+#!/bin/sh
+if ! command -v dig > /dev/null 2> /dev/null; then echo "dig must be installed for this script to work"; exit 1; fi
+if ! command -v whois > /dev/null 2>/dev/null; then echo "whois must be installed for this script to work"; exit 1; fi
+
+list=""
+for arg in "$@"; do
+    if dig "$arg" -t a +short 2>/dev/null | head -n 1 | xargs whois 2>/dev/null | grep -i cloudflare > /dev/null 2>/dev/null; then
+        list="$list\n$arg yes"
+    else
+        list="$list\n$arg no"
+    fi
+done
+
+echo -e "SITE CLOUDFLARE?\n$list" | column -t

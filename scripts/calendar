@@ -1,0 +1,39 @@
+#!/bin/sh
+
+SECONDS_AGO="$(date -d '-60sec' +%s)"
+NOW="$(date +%s)"
+
+TMP="/tmp/$UID.cal_state"
+touch "$TMP"
+STATE="$(cat $TMP)"
+if [ "$STATE" = "" ]; then
+	STATE="0;$NOW;no;0"
+fi
+
+DIFF="$(echo $STATE | cut -d ";" -f1)"
+DIFFDATE="$(echo $STATE | cut -d ";" -f2)"
+YEARDISP="$(echo $STATE | cut -d ";" -f3)"
+NOTIFYID="$(echo $STATE | cut -d ";" -f4)"
+
+set_diff() {
+	if [ "$DIFFDATE" -lt "$SECONDS_AGO" ]; then
+		DIFF=0;
+		YEARDISP=no
+	fi
+	DIFF=$((DIFF+$1))
+}
+
+if [ "$1" = "month" ]; then YEARDISP=no; DIFF=0; fi
+if [ "$1" = "year" ]; then YEARDISP=yes; DIFF=0; fi
+if [ "$1" = "up" ]; then set_diff 1; fi
+if [ "$1" = "down" ]; then set_diff -1; fi
+
+CAL_ARGS=""
+MOD=""
+UNIT="month"
+COLOR="always"
+if [ $(echo "$DIFF" | cut -c1) != "-" ]; then MOD="+"; fi
+if [ "$YEARDISP" = "yes" ]; then CAL_ARGS="-y"; UNIT="year"; fi
+if [ "$DIFF" != "0" ]; then COLOR=never; fi
+NOTIFYID="$(dunstify -p -r "$NOTIFYID" -t 60000 "Calendar" "$(cal -m --color=$COLOR $CAL_ARGS -- "$MOD$DIFF $UNIT" | sed "s/..7m/<b><span color=\"red\">/;s/..0m/<\/span><\/b>/")")"
+echo "$DIFF;$NOW;$YEARDISP;$NOTIFYID" > "$TMP"
