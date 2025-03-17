@@ -30,8 +30,8 @@ interval = 5
 chip = "k10temp-pci-00c3"
 inputs = ["Tctl"]
 format = " $average.eng(w:2)"
-info = 55
-warning = 65
+info = 65
+warning = 75
 
 [[block]]
 block = "memory"
@@ -75,6 +75,7 @@ format = " $icon $volume $output_name "
 merge_with_next = true
 [block.mappings]
 "alsa_output.usb-Yoyodyne_Consulting_ODAC-revB-01.analog-stereo" = "\uf025"
+"alsa_output.usb-SAVITECH_Bravo-X_USB_Audio-01.analog-stereo" = "\uf025"
 "alsa_output.pci-0000_0e_00.4.iec958-stereo" = "\uf026"
 "alsa_output.pci-0000_0c_00.1.hdmi-stereo" = "\uf390"
 [block.theme_overrides]
