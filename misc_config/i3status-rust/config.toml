@@ -78,6 +78,7 @@ merge_with_next = true
 "alsa_output.usb-SAVITECH_Bravo-X_USB_Audio-01.analog-stereo" = "\uf025"
 "alsa_output.pci-0000_0e_00.4.iec958-stereo" = "\uf026"
 "alsa_output.pci-0000_0c_00.1.hdmi-stereo" = "\uf390"
+"alsa_output.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.analog-stereo" = "\uf729"
 [block.theme_overrides]
 warning_fg = { link = "critical_fg" }
 [[block.click]]
