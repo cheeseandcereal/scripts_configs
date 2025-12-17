@@ -70,7 +70,7 @@ def main(servers_json_path, city_code, conf_file):
     # Replace endpoint and public key in existing conf lines
     for i in range(len(existing_conf)):
         if existing_conf[i].startswith('Endpoint'):
-            existing_conf[i] = f'Endpoint = {selected["ipv4_addr_in"]}:443\n'
+            existing_conf[i] = f'Endpoint = {selected["ipv4_addr_in"]}:53\n'
         elif existing_conf[i].startswith('PublicKey'):
             existing_conf[i] = f'PublicKey = {selected["pubkey"]}\n'
     # Write new configuration
