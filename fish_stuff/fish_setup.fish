@@ -41,6 +41,13 @@ end
 
 echo '#!/usr/bin/env fish
 
+# force opencode (when opened in herdr) to use --auto
+if test "$HERDR_ENV" = 1
+    function opencode --wraps opencode
+        command opencode --auto $argv
+    end
+end
+
 set -U pure_enable_single_line_prompt true
 set -x PATH $PATH /home/adam/Documents/scripts .
 set -x EDITOR vim
@@ -55,7 +62,6 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # Generic aliases
 abbr ll "ls -Al"
-abbr k "kubectl"
 abbr v "vim"
 abbr g "git"
 abbr p "sudo pacman"
@@ -64,6 +70,7 @@ abbr copy \'perl -pe "chomp if eof" | xsel -ib\'
 abbr rcopy \'rsync -arh --progress\'
 abbr orand \abbr orand \'xdg-open (ls | shuf -n 1)\'
 abbr code \'code . && exit\'
+abbr openyolo \'opencode --auto\'
 
 # Kubectl aliases
 abbr k "kubectl"
@@ -72,7 +79,7 @@ abbr gl \'kubectl logs\'
 abbr kp \'kubectl delete pod --grace-period=0\'
 abbr descp \'kubectl describe pod\'
 
-nvm use 20' > ~/.config/fish/config.fish
+nvm use 24' > ~/.config/fish/config.fish
 
 
 # Done
