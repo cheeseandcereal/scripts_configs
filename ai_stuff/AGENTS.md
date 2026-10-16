@@ -3,9 +3,20 @@
 ## Writing style
 Applies to all text: docs, code comments, log lines, commit messages,
 chat replies.
+- Keep replies and written deliverables concise and proportional to the
+  task. Cover the substance; omit filler, boilerplate, repeated summaries,
+  and lengthy caveats.
+- Use plain, literal language suited to the reader's knowledge. Avoid
+  mannered prose: metaphor or flourish that substitutes for saying what
+  you mean, such as "earns its keep" instead of "is useful". Avoid jargon,
+  invented compound labels, and stock phrases. Keep sentences readable
+  rather than compressing them into dense shorthand.
+- State the point directly. Avoid rhetorical questions, canned conclusions,
+  and unsolicited contrasts about what something isn't, what won't change,
+  or what you won't do.
 - Never use em dashes. Rephrase, or use a comma, colon, or parentheses
   instead.
-- Avoid en dashes too, including in numeric ranges: write `2-5`, not
+- Also avoid en dashes, including in numeric ranges: write `2-5`, not
   `2–5`.
 - Keep code comments as condensed as is reasonable. Avoid comments of
   3+ lines unless really necessary.
@@ -64,18 +75,27 @@ Applies to code comments, docstrings, documentation, and code/test names.
 
 # OpenCode notes
 
-## Parallel work (OpenCode v1.x only)
+## Parallel work
+- Parallelize work whenever possible/practical, especially to save time.
+
+## Delegation
+- Use subagents when doing so could save time, improve quality, or keep
+  the main agent's context focused. Parallelize independent work when
+  practical.
+- Default to fresh subagents. Resume an existing agent only for a direct
+  continuation that benefits from its prior context.
+- Write delegation prompts and inter-agent messages for human readers:
+  use clear sentences, normal grammar, and proper spaces between words
+  and numbers.
+
+## Parallel execution (OpenCode v1.x only)
 If running OpenCode v2+, skip this section and tell me it's stale.
 - Tool calls, including `task` delegations to subagents, run
   concurrently only when emitted in the same message. If you say
   you'll launch agents "in parallel", put every `task` call in that
   one message; never send one, wait, then send the next.
-- `task` blocks your turn. To work "while an agent runs", include your
-  own independent calls in that same message or delegate to another
-  agent. Don't claim concurrent work you didn't batch.
-- Long shell jobs can use
-  `nohup cmd > /tmp/opencode/x.log 2>&1 &` to survive across turns.
-  A bare `cmd &` still blocks.
+- After sending a message with tool calls, you cannot continue until every
+  call in that message has finished, including subagent tasks.
 
 ## Clarifying questions
 - This applies in every mode/agent, but especially in plan mode: before
