@@ -82,9 +82,10 @@ Applies to code comments, docstrings, documentation, and code/test names.
 - Use subagents when doing so could save time, improve quality, or keep
   the main agent's context focused. Parallelize independent work when
   practical.
-- Start a fresh subagent session when delegating. Reserve resuming for
-  direct follow-ups, such as completing unfinished output, clarifying the
-  agent's work, etc.
+- Start a fresh subagent session for each new assignment, even for related
+  work. Give it a brief handoff and let it re-read files as needed. Reserve
+  resuming for brief follow-ups about the previous response, such as
+  completing unfinished output or clarifying a result.
 - Write delegation prompts and inter-agent messages for human readers:
   use clear sentences, normal grammar, and proper spaces between words
   and numbers.
