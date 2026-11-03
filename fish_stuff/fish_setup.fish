@@ -60,6 +60,16 @@ set -x SSH_AUTH_SOCK "/run/user/1000/gnupg/S.gpg-agent.ssh"
 set -x GPG_TTY (tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
+# Swap alt/ctrl deletion behavior
+bind ctrl-backspace backward-kill-word
+bind ctrl-delete kill-word
+bind ctrl-left backward-word
+bind ctrl-right forward-word
+bind alt-backspace backward-kill-token
+bind alt-delete kill-token
+bind alt-left backward-token
+bind alt-right forward-token
+
 # Generic aliases
 abbr ll "ls -Al"
 abbr v "vim"
@@ -79,7 +89,7 @@ abbr gl \'kubectl logs\'
 abbr kp \'kubectl delete pod --grace-period=0\'
 abbr descp \'kubectl describe pod\'
 
-nvm use 24' > ~/.config/fish/config.fish
+nvm use 26' > ~/.config/fish/config.fish
 
 
 # Done
