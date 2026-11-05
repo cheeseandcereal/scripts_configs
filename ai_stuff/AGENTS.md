@@ -50,13 +50,15 @@ Applies to code comments, docstrings, documentation, and code/test names.
   useful facts in terms of the current system.
 
 ## Git commits
+- Use `gh` for GitHub operations. For Git fetch/pull/push, use HTTPS URLs
+  with `gh` authentication instead of SSH. Run `gh auth setup-git` if needed.
 - Do not set `user.email`, `user.name`, or pass `-c user.X=...` when
   committing. Use the ambient git config.
-- Always disable commit signing. Pass `--no-gpg-sign` explicitly on every
-  `git commit`, `git merge`, `git rebase`, `git cherry-pick`, and
-  `git tag` invocation (even if repo/global config would not sign), so
-  behavior is independent of `commit.gpgsign` / `tag.gpgsign` settings.
-  Do not enable signing unless the user explicitly asks.
+- Always disable signing on every `git commit`, `git merge`, `git rebase`,
+  `git cherry-pick`, and `git tag` invocation, including `--continue`.
+  Use `git -c commit.gpgSign=false -c tag.gpgSign=false <subcommand> ...`,
+  regardless of repo/global config. Enable signing only when explicitly
+  requested.
 - Follow Conventional Commits (`feat:`, `fix:`, `refactor:`, `docs:`,
   `test:`, `chore:`) unless the project AGENTS.md says otherwise.
 - Never run destructive git operations (force push to main, hard reset on
