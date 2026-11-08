@@ -1,0 +1,21 @@
+{
+  "name": "opencode-agent-statsline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tui": "./tui.jsx"
+  },
+  "scripts": {
+    "test": "bun test --timeout 10000"
+  },
+  "devDependencies": {
+    "@opentui/core": "0.8.3",
+    "@opentui/solid": "0.8.3",
+    "bun": "1.4.4",
+    "solid-js": "1.9.18"
+  },
+  "allowScripts": {
+    "bun@1.4.4": true
+  }
+}
