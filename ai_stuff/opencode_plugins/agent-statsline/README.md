@@ -3,10 +3,10 @@
 An OpenCode v2 TUI plugin for reasoning activity and subagent context usage.
 
 - **Main sessions:** reasoning status below the input box, before native usage and cost. Hidden in shell mode and when the footer hides its details.
-- **Subagent sessions:** model, context, and reasoning above the subagent picker, including nested subagents.
+- **Subagent sessions:** model with variant when set, context, and reasoning above the subagent picker, including nested subagents.
 
 ```text
-Claude Fable 5.1 (Global) · 674.9K (64%) · Thought: 2s
+Claude Fable 5.1 (Global) (high) · 674.9K (64%) · Thought: 2s
 Thinking: 2s · 14s total · 3 blocks
 ```
 

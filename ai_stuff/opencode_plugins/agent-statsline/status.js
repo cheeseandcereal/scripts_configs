@@ -107,6 +107,7 @@ export function contextLabel(messages, models) {
     )
     const percent = model?.limit.context ? ` (${Math.round(tokens / model.limit.context * 100)}%)` : ""
     const count = tokens < 1_000 ? String(tokens) : tokenFormatter.format(tokens)
-    return `${model?.name || message.model.id} · ${count}${percent}`
+    const variant = message.model.variant ? ` (${message.model.variant})` : ""
+    return `${model?.name || message.model.id}${variant} · ${count}${percent}`
   }
 }
