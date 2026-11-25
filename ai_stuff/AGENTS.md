@@ -84,32 +84,24 @@ Applies to code comments, docstrings, documentation, and code/test names.
 - Use subagents when doing so could save time, improve quality, or keep
   the main agent's context focused. Parallelize independent work when
   practical.
+- When coordinating agents or managing context, delegate every work item,
+  including discovery and verification. Yield and synthesize worker reports.
 - Start a fresh subagent session for each new assignment, even for related
   work. Give it a brief handoff and let it re-read files as needed. Reserve
   resuming for brief follow-ups about the previous response, such as
   completing unfinished output or clarifying a result.
-- Write delegation prompts and inter-agent messages for human readers:
-  use clear sentences, normal grammar, and proper spaces between words
-  and numbers.
-
-## Parallel execution (OpenCode v1.x only)
-If running OpenCode v2+, skip this section and tell me it's stale.
-- Tool calls, including `task` delegations to subagents, run
-  concurrently only when emitted in the same message. If you say
-  you'll launch agents "in parallel", put every `task` call in that
-  one message; never send one, wait, then send the next.
-- After sending a message with tool calls, you cannot continue until every
-  call in that message has finished, including subagent tasks.
+- Write subagent prompts and follow-ups for human readers: use clear
+  sentences, normal grammar, and proper spaces between words and numbers.
 
 ## Clarifying questions
-- This applies in every mode/agent, but especially in plan mode: before
+- This applies to every agent, but especially the Plan agent: before
   producing a plan, route every clarification through `question`.
 - For closed questions, provide 2-5 concrete `options` that cover the
   likely answers.
 - For open-ended questions (naming, free-form descriptions, rationale,
   or anything where you cannot enumerate reasonable choices), still call
-  the `question` tool. Set `custom: true` so the "Type your own answer"
-  field is available, and either:
+  the `question` tool. The "Type your own answer" option is added
+  automatically, so either:
     - pass an empty/short options list and make clear in the question
       text that a typed answer is expected, OR
     - include 1-3 example answers as options purely as prompts, and
